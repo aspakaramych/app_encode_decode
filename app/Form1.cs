@@ -82,9 +82,12 @@ namespace app
                     
                     int new_pixel_int = pixel_argb + input[0];
                     
+                    
+                    
                     Color new_pixel = Color.FromArgb(new_pixel_int);
-
+                    
                     bmp_out.SetPixel(i, j, new_pixel);
+                    
                     input.RemoveAt(0);
 
                 }
@@ -118,15 +121,7 @@ namespace app
         }
 
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                filepat_open_decode = ofd.FileName;
-                pictureBox4.Image = Image.FromFile(filepat_open_decode); 
-            }
-        }
+        
 
 
         private void button6_Click(object sender, EventArgs e)
@@ -135,7 +130,7 @@ namespace app
             Bitmap encoding_img = new Bitmap(filepat_open_decode);
             int x = ishod.Width;
             int y = ishod.Height;
-            input_string_decode = decodeing_text(ishod, encoding_img, x, y);
+            input_string_decode = decodeing_text(ishod, encoding_img, 100, 100);
             label7.Text = input_string_decode;
         }
 
@@ -152,25 +147,40 @@ namespace app
                     Color encodeing_pixel = encoding_img.GetPixel(i, j);
                     
                     int pixel_ishod_int = pixel_ishod.ToArgb();
-                    label7.Text += pixel_ishod_int.ToString();
+                    
                     int encodeing_pixel_int = encodeing_pixel.ToArgb();
-                    label7.Text += encodeing_pixel_int.ToString();
+                    
                     
                     
                     int char_int = encodeing_pixel_int - pixel_ishod_int;
+                    
+                    
                     if (char_int == 0)
                     {
                         continue;
                     }
-                    label7.Text = char_int.ToString();
-                    char c = (char)char_int;
-                    label7.Text = c.ToString();
+
+                    IConvertible ch = char_int;
+                    
+                    char c = ch.ToChar(null);
+                    
                     decoding_text += c;
                     
                 }
             }
 
             return decoding_text;
+        }
+
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                filepat_open_decode = ofd.FileName;
+                pictureBox4.Image = Image.FromFile(filepat_open_decode); 
+            }
         }
     }
 }

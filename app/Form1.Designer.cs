@@ -46,6 +46,7 @@
             this.button6 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -215,15 +216,24 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(302, 59);
             this.label7.TabIndex = 18;
-            this.label7.Text = "label7";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(951, 35);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(132, 40);
+            this.button5.TabIndex = 19;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1257, 800);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.label6);
@@ -250,6 +260,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button button5;
 
         private System.Windows.Forms.Label label7;
 

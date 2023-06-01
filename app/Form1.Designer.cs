@@ -42,10 +42,10 @@
             this.button4 = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.button6 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -182,17 +182,6 @@
             this.label6.TabIndex = 13;
             this.label6.Text = "Исходное изображение";
             // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.button5.Location = new System.Drawing.Point(952, 25);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(131, 52);
-            this.button5.TabIndex = 14;
-            this.button5.Text = "Выберете закодированное изображение";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // pictureBox4
             // 
             this.pictureBox4.Location = new System.Drawing.Point(925, 115);
@@ -220,15 +209,23 @@
             this.textBox2.Size = new System.Drawing.Size(229, 20);
             this.textBox2.TabIndex = 17;
             // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(541, 572);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(302, 59);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "label7";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1257, 800);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.button4);
@@ -254,13 +251,13 @@
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.Label label7;
+
         private System.Windows.Forms.TextBox textBox2;
 
         private System.Windows.Forms.Button button6;
 
         private System.Windows.Forms.PictureBox pictureBox4;
-
-        private System.Windows.Forms.Button button5;
 
         private System.Windows.Forms.Label label6;
 

@@ -16,10 +16,9 @@ namespace app
         public string input_string_encode = string.Empty;
         public string filepath_close_encode = string.Empty;
         public Bitmap new_bmp_encode = null;
-        public string filepath_decode_ishod = string.Empty;
-        public string filepath_decode_encoding_img = string.Empty;
-        public string input_string_decode = string.Empty;
         
+        public string input_string_decode = string.Empty;
+        public string filepat_open_decode = string.Empty;
         
 
         public Form1()
@@ -54,14 +53,15 @@ namespace app
 
         private List<int> encode_input_string(string input)
         {
-            var input_list = new List<int>();
 
-            foreach(char c in input)
+            var output = new List<int>();
+
+            foreach(byte c in input)
             {
                 int int_char = System.Convert.ToInt32(c);
-                input_list.Add(int_char);
+                output.Add(int_char);
             }
-            return input_list;
+            return output;
         }
 
         private Bitmap encode_image(Bitmap bmp_in, int x, int y, List<int> input)
@@ -78,9 +78,10 @@ namespace app
                     }
                     Color pixel = bmp_out.GetPixel(i, j);
                     
-                    int pixel_argb = pixel.ToArgb();
+                    int pixel_argb = pixel.ToArgb(); 
+                    
                     int new_pixel_int = pixel_argb + input[0];
-
+                    
                     Color new_pixel = Color.FromArgb(new_pixel_int);
 
                     bmp_out.SetPixel(i, j, new_pixel);
@@ -111,7 +112,7 @@ namespace app
             OpenFileDialog ofd = new OpenFileDialog();
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                filepath_decode_ishod = ofd.FileName;
+                filepath_open_encode = ofd.FileName;
                 pictureBox3.Image = Image.FromFile(filepath_open_encode); 
             }
         }
@@ -122,24 +123,26 @@ namespace app
             OpenFileDialog ofd = new OpenFileDialog();
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                filepath_decode_encoding_img = ofd.FileName;
-                pictureBox4.Image = Image.FromFile(filepath_open_encode); 
+                filepat_open_decode = ofd.FileName;
+                pictureBox4.Image = Image.FromFile(filepat_open_decode); 
             }
         }
 
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Bitmap ishod = new Bitmap(filepath_decode_ishod);
-            Bitmap encoding_img = new Bitmap(filepath_decode_encoding_img);
+            Bitmap ishod = new Bitmap(filepath_open_encode);
+            Bitmap encoding_img = new Bitmap(filepat_open_decode);
             int x = ishod.Width;
             int y = ishod.Height;
             input_string_decode = decodeing_text(ishod, encoding_img, x, y);
+            label7.Text = input_string_decode;
         }
 
         private string decodeing_text(Bitmap ishod, Bitmap encoding_img, int x, int y)
         {
-            string decodeing_text = "";
+            string decoding_text = "";
+            
             int i, j;
             for (i = 0; i < x; i++)
             {
@@ -147,21 +150,27 @@ namespace app
                 {
                     Color pixel_ishod = ishod.GetPixel(i, j);
                     Color encodeing_pixel = encoding_img.GetPixel(i, j);
+                    
                     int pixel_ishod_int = pixel_ishod.ToArgb();
+                    label7.Text += pixel_ishod_int.ToString();
                     int encodeing_pixel_int = encodeing_pixel.ToArgb();
-                    if (encodeing_pixel_int == pixel_ishod_int)
+                    label7.Text += encodeing_pixel_int.ToString();
+                    
+                    
+                    int char_int = encodeing_pixel_int - pixel_ishod_int;
+                    if (char_int == 0)
                     {
                         continue;
                     }
-                    else
-                    {
-                        int char_int = encodeing_pixel_int - pixel_ishod_int;
-                        char letter = System.Convert.ToChar(char_int);
-                        decodeing_text += letter;
-                    }
+                    label7.Text = char_int.ToString();
+                    char c = (char)char_int;
+                    label7.Text = c.ToString();
+                    decoding_text += c;
+                    
                 }
             }
-            return decodeing_text;
+
+            return decoding_text;
         }
     }
 }

@@ -16,6 +16,12 @@ namespace app
         public string input_string_encode = string.Empty;
         public string filepath_close_encode = string.Empty;
         public Bitmap new_bmp_encode = null;
+        public string filepath_decode_ishod = string.Empty;
+        public string filepath_decode_encoding_img = string.Empty;
+        public string input_string_decode = string.Empty;
+        
+        
+
         public Form1()
         {
             InitializeComponent();
@@ -98,6 +104,64 @@ namespace app
                 filepath_close_encode = save_dialog.FileName;
                 new_bmp_encode.Save(filepath_close_encode);
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                filepath_decode_ishod = ofd.FileName;
+                pictureBox3.Image = Image.FromFile(filepath_open_encode); 
+            }
+        }
+
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                filepath_decode_encoding_img = ofd.FileName;
+                pictureBox4.Image = Image.FromFile(filepath_open_encode); 
+            }
+        }
+
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Bitmap ishod = new Bitmap(filepath_decode_ishod);
+            Bitmap encoding_img = new Bitmap(filepath_decode_encoding_img);
+            int x = ishod.Width;
+            int y = ishod.Height;
+            input_string_decode = decodeing_text(ishod, encoding_img, x, y);
+        }
+
+        private string decodeing_text(Bitmap ishod, Bitmap encoding_img, int x, int y)
+        {
+            string decodeing_text = "";
+            int i, j;
+            for (i = 0; i < x; i++)
+            {
+                for (j = 0; j < y; j++)
+                {
+                    Color pixel_ishod = ishod.GetPixel(i, j);
+                    Color encodeing_pixel = encoding_img.GetPixel(i, j);
+                    int pixel_ishod_int = pixel_ishod.ToArgb();
+                    int encodeing_pixel_int = encodeing_pixel.ToArgb();
+                    if (encodeing_pixel_int == pixel_ishod_int)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        int char_int = encodeing_pixel_int - pixel_ishod_int;
+                        char letter = System.Convert.ToChar(char_int);
+                        decodeing_text += letter;
+                    }
+                }
+            }
+            return decodeing_text;
         }
     }
 }
